@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aarti's Dynamic Portfolio</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #003f5c;
+      margin: 0;
+      padding: 0;
+      color: white;
+    }
+
+    header {
+      background-color: #2f4b7c;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 3em;
+      margin-bottom: 0.2em;
+    }
+
+    header img {
+      border-radius: 50%;
+      margin-top: 20px;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 4px solid white;
+    }
+
+    .section-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      padding: 30px;
+    }
+
+    .box {
+      flex: 1 1 300px;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #2f4b7c;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    h2 {
+      color: #fcd34d;
+      border-bottom: 2px solid #fcd34d;
+      padding-bottom: 5px;
+      font-weight: 700;
+    }
+
+    ul,
+    ol {
+      padding-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #2f4b7c;
+      color: white;
+      padding: 15px;
+      margin-top: 40px;
+      font-weight: 600;
+    }
+
+    a {
+      color: #90cdf4;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .collapsible {
+      background-color: #445d93;
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    .active, .collapsible:hover {
+      background-color: #637bb5;
+    }
+
+    .content {
+      padding: 0 15px;
+      display: none;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="name"></h1>
+    <p id="course"></p>
+    <p id="location"></p>
+    <p id="contact"></p>
+    <p><a id="linkedin" target="_blank" rel="noopener noreferrer"></a></p>
+    <img id="profile-pic" alt="Aarti's Photo" />
+  </header>
+
+  <div class="section-container" id="sections"></div>
+
+  <footer>© 2025 Aarti's Portfolio. All rights reserved.</footer>
+
+  <script>
+    const data = {
+      name: "Aarti Dwivedi",
+      course: "BTech, Data Science Student",
+      location: "Hyderabad, Telangana",
+      contact: "Email: aarti.workrelated@gmail.com | Phone: 9063086021",
+      linkedin: {
+        url: "https://www.linkedin.com/in/aarti-dwivedi-088a852b9",
+        text: "LinkedIn: Aarti Dwivedi"
+      },
+      profilePic: "https://i.postimg.cc/NF7tjf1q/profile-jpg.jpg",
+      sections: [
+        {
+          title: "Objective",
+          content: `Aspiring Data Science professional proficient in Python, Excel, and data visualization tools. Passionate about applying analytical skills and creativity to solve problems and deliver insightful projects. Eager to gain practical experience through internships that foster both technical and creative growth.`
+        },
+        {
+          title: "Education",
+          list: [
+            "BTech in Data Science – MRECW, Hyderabad (Expected: 2027 | CGPA: 8.53)",
+            "Class XII (PCM) – Sri Chaitanya Jr. College, Hyderabad (2022 | 74%)",
+            "Class X – Lotus National School, Hyderabad (2020 | 71%)"
+          ]
+        },
+        {
+          title: "Skills",
+          list: [
+            "Python (Basic)",
+            "Jupyter Notebook, Power BI, Excel",
+            "Learning: Git, SQL, VS Code",
+            "Concepts: Data Handling, File Operations, DSA Basics"
+          ]
+        },
+        {
+          title: "Soft Skills",
+          list: [
+            "Creative Thinking",
+            "Problem Solving",
+            "Communication Skills",
+            "Team Collaboration",
+            "Adaptability",
+            "Time Management",
+            "Attention to Detail",
+            "Willingness to Learn"
+          ]
+        },
+        {
+          title: "Projects",
+          list: [
+            "Liver Disease Prediction – Python, Scikit-learn",
+            "Mood Tracker Android App",
+            "Art Gallery Website (HTML/CSS)",
+            "Personal Growth Tracker Sheet",
+            "Data Analysis in Excel & Python"
+          ]
+        },
+        {
+          title: "Certifications",
+          list: [
+            "Generative AI – LinkedIn Learning",
+            "Azure AI Fundamentals – Microsoft",
+            "Python for Data Science – Infosys",
+            "Statistics and Probability – Infosys",
+            "Business Analysis Foundations – LinkedIn Learning"
+          ]
+        },
+        {
+          title: "Interests",
+          list: [
+            "Painting and Drawing",
+            "Listening to Music",
+            "Learning new things",
+            "Exploring creative ideas"
+          ]
+        }
+      ]
+    };
+
+    document.getElementById("name").innerText = data.name;
+    document.getElementById("course").innerText = data.course;
+    document.getElementById("location").innerText = data.location;
+    document.getElementById("contact").innerText = data.contact;
+    const link = document.getElementById("linkedin");
+    link.href = data.linkedin.url;
+    link.innerText = data.linkedin.text;
+    document.getElementById("profile-pic").src = data.profilePic;
+
+    const sectionContainer = document.getElementById("sections");
+    data.sections.forEach(sec => {
+      const box = document.createElement("div");
+      box.className = "box";
+
+      const h2 = document.createElement("h2");
+      h2.innerText = sec.title;
+      box.appendChild(h2);
+
+      const toggleBtn = document.createElement("button");
+      toggleBtn.className = "collapsible";
+      toggleBtn.innerText = `View ${sec.title}`;
+      box.appendChild(toggleBtn);
+
+      const contentDiv = document.createElement("div");
+      contentDiv.className = "content";
+
+      if (sec.content) {
+        const p = document.createElement("p");
+        p.innerText = sec.content;
+        contentDiv.appendChild(p);
+      }
+
+      if (sec.list) {
+        const ul = document.createElement("ul");
+        sec.list.forEach(item => {
+          const li = document.createElement("li");
+          li.innerText = item;
+          ul.appendChild(li);
+        });
+        contentDiv.appendChild(ul);
+      }
+
+      box.appendChild(contentDiv);
+      sectionContainer.appendChild(box);
+    });
+
+    document.querySelectorAll(".collapsible").forEach(btn => {
+      btn.addEventListener("click", function () {
+        this.classList.toggle("active");
+        const content = this.nextElementSibling;
+        content.style.display = content.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+</body>
+</html>
